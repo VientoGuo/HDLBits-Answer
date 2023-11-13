@@ -1,3 +1,5 @@
+//https://hdlbits.01xz.net/wiki/Fsm_serialdata
+// debug code:
 module top_module(
     input clk,
     input in,
