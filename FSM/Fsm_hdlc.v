@@ -1,5 +1,6 @@
 // https://hdlbits.01xz.net/wiki/Fsm_hdlc
 // debug note: there is no IDLE, the program start from received a 0 by default.
+//             and the 0 at end of falg should also be considered as a begin of the next code.
 module top_module(
     input clk,
     input reset,    // Synchronous reset
