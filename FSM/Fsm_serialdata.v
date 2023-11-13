@@ -1,5 +1,5 @@
 //https://hdlbits.01xz.net/wiki/Fsm_serialdata
-// debug code:
+// debug code: bit1 -> outdatd[0];
 module top_module(
     input clk,
     input in,
@@ -7,40 +7,42 @@ module top_module(
     output [7:0] out_byte,
     output done
 ); //
-	parameter IDLE = 4'b0000;
+
+    // Use FSM from Fsm_serial
+    parameter IDLE = 4'b0000;
     parameter START = 4'b0001;
-    parameter BYTE1 = 4'b0010;
-    parameter BYTE2 = 4'b0011;
-    parameter BYTE3 = 4'b0100;
-    parameter BYTE4 = 4'b0101;
-    parameter BYTE5 = 4'b0110;
-    parameter BYTE6 = 4'b0111;
-    parameter BYTE7 = 4'b1000;
-    parameter BYTE8 = 4'b1001;
+    parameter BIT1 = 4'b0010;
+    parameter BIT2 = 4'b0011;
+    parameter BIT3 = 4'b0100;
+    parameter BIT4 = 4'b0101;
+    parameter BIT5 = 4'b0110;
+    parameter BIT6 = 4'b0111;
+    parameter BIT7 = 4'b1000;
+    parameter BIT8 = 4'b1001;
     parameter STOP = 4'b1010;
     parameter WAIT = 4'b1011;
-    reg [3:0]state,next_state;
-    reg [7:0]in_byte;
-    // Use FSM from Fsm_serial
+    reg[3:0] state, next_state;
+    reg[7:0] in_byte;
     always@(posedge clk)begin
-        if(reset) state = IDLE;
+        if(reset)state = IDLE;
         else state = next_state;
     end
+    
     always@(*)begin
         case(state)
             IDLE:begin
-                if(!in)next_state = START;
-                else next_state = IDLE;
+                if(in)next_state = IDLE;
+                else next_state = START;
             end
-            START:next_state = BYTE1;
-            BYTE1:next_state = BYTE2;
-            BYTE2:next_state = BYTE3;
-            BYTE3:next_state = BYTE4;
-            BYTE4:next_state = BYTE5;
-            BYTE5:next_state = BYTE6;
-            BYTE6:next_state = BYTE7;
-            BYTE7:next_state = BYTE8;
-            BYTE8:begin
+            START:next_state = BIT1;
+            BIT1:next_state = BIT2;
+            BIT2:next_state = BIT3;
+            BIT3:next_state = BIT4;
+            BIT4:next_state = BIT5;
+            BIT5:next_state = BIT6;
+            BIT6:next_state = BIT7;
+            BIT7:next_state = BIT8;
+            BIT8:begin
                 if(in)next_state = STOP;
                 else next_state = WAIT;
             end
@@ -49,26 +51,26 @@ module top_module(
                 else next_state = WAIT;
             end
             STOP:begin
-                if(!in)next_state = START;
-                else next_state = IDLE;
+                if(in)next_state = IDLE;
+                else next_state = START;
             end
         endcase
     end
     always@(*)begin
-        if(next_state == BYTE1)in_byte[0] = in;
-        if(next_state == BYTE2)in_byte[1] = in;
-        if(next_state == BYTE3)in_byte[2] = in;
-        if(next_state == BYTE4)in_byte[3] = in;
-        if(next_state == BYTE5)in_byte[4] = in;
-        if(next_state == BYTE6)in_byte[5] = in;
-        if(next_state == BYTE7)in_byte[6] = in;
-        if(next_state == BYTE8)in_byte[7] = in;
-    end
-    always@(*)begin
         done = state==STOP;
-        if(done)out_byte = in_byte[7:0];
+        if(done)out_byte=in_byte;
+        else out_byte = 0;
     end
     // New: Datapath to latch input bits.
+    always@(*)begin
+        if (next_state == BIT1) in_byte[0]=in;
+        if (next_state == BIT2) in_byte[1]=in;
+        if (next_state == BIT3) in_byte[2]=in;
+        if (next_state == BIT4) in_byte[3]=in;
+        if (next_state == BIT5) in_byte[4]=in;
+        if (next_state == BIT6) in_byte[5]=in;
+        if (next_state == BIT7) in_byte[6]=in;
+        if (next_state == BIT8) in_byte[7]=in;
+    end
 
 endmodule
-
