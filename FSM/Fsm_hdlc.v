@@ -1,5 +1,5 @@
 // https://hdlbits.01xz.net/wiki/Fsm_hdlc
-// debug note: there is no IDLE, the program start from BIT1 by default.
+// debug note: there is no IDLE, the program start from received a 0 by default.
 module top_module(
     input clk,
     input reset,    // Synchronous reset
