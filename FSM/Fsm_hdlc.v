@@ -1,3 +1,5 @@
+// https://hdlbits.01xz.net/wiki/Fsm_hdlc
+// debug note: there is no IDLE, the program start from BIT1 by default.
 module top_module(
     input clk,
     input reset,    // Synchronous reset
@@ -6,13 +8,13 @@ module top_module(
     output flag,
     output err);
     parameter START=4'b0001;
-    parameter BYTE1=4'b0010;
-    parameter BYTE2=4'b0011;
-    parameter BYTE3=4'b0100;
-    parameter BYTE4=4'b0101;
-    parameter BYTE5=4'b0110;
+    parameter BIT1=4'b0010;
+    parameter BIT2=4'b0011;
+    parameter BIT3=4'b0100;
+    parameter BIT4=4'b0101;
+    parameter BIT5=4'b0110;
     parameter DISCARD=4'b0111;
-    parameter BYTE6=4'b1000;
+    parameter BIT6=4'b1000;
     parameter FLAG=4'b1001;
     parameter ERROR=4'b1010;
     reg[3:0] state, next_state;
@@ -25,40 +27,40 @@ module top_module(
     always@(*)begin
         case(state)
             START:begin
-                if(in)next_state = BYTE1;
+                if(in)next_state = BIT1;
                 else next_state = START;
             end
-            BYTE1:begin
-                if(in)next_state = BYTE2;
+            BIT1:begin
+                if(in)next_state = BIT2;
                 else next_state = START;
             end
-            BYTE2:begin
-                if(in)next_state = BYTE3;
+            BIT2:begin
+                if(in)next_state = BIT3;
                 else next_state = START;
             end
-            BYTE3:begin
-                if(in)next_state = BYTE4;
+            BIT3:begin
+                if(in)next_state = BIT4;
                 else next_state = START;
             end
-            BYTE4:begin
-                if(in)next_state = BYTE5;
+            BIT4:begin
+                if(in)next_state = BIT5;
                 else next_state = START;
             end
-            BYTE5:begin
-                if(in)next_state = BYTE6;
+            BIT5:begin
+                if(in)next_state = BIT6;
                 else next_state = DISCARD;
             end
             DISCARD:begin
                 if(~in)next_state = START;
-                else next_state = BYTE1;
+                else next_state = BIT1;
                 end
-            BYTE6:begin
+            BIT6:begin
                 if(in)next_state = ERROR;
                 else next_state = FLAG;
             end
             FLAG:begin
                 if(~in)next_state = START;
-                else next_state = BYTE1;
+                else next_state = BIT1;
             end
             ERROR:begin
                 if(in)next_state = ERROR;
