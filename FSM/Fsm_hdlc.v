@@ -5,7 +5,6 @@ module top_module(
     output disc,
     output flag,
     output err);
-    parameter IDLE=4'b0000;
     parameter START=4'b0001;
     parameter BYTE1=4'b0010;
     parameter BYTE2=4'b0011;
@@ -25,10 +24,6 @@ module top_module(
     
     always@(*)begin
         case(state)
-            IDLE:begin
-                if(!in)next_state = START;
-                else next_state = IDLE;
-            end
             START:begin
                 if(in)next_state = BYTE1;
                 else next_state = START;
