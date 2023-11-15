@@ -1,3 +1,4 @@
+// refrence: https://gist.github.com/gibiansky/4247200
 module fibo (
   input clk;
   input rst;
