@@ -19,9 +19,9 @@ module top_module (
     reg count_done;
     always@(posedge clk)begin
         if(reset)begin
-            state = IDLE;
+            state <= IDLE;
         end
-        else state = next_state;
+        else state <= next_state;
     end
     always@(*)begin
         case(state)
@@ -67,7 +67,7 @@ module top_module (
             end
         endcase
     end
-    always@(posedge clk)begin
+ 	always@(posedge clk)begin
         if(state == DELAY1) begin
             cnt = 0;
             count_num = 0;
@@ -76,9 +76,9 @@ module top_module (
         if((cnt%1000 == 0)&(cnt!=0)) count_num = count_num +1;
     end
     always@(*)begin
-        done = state == ASSERT_DONE;
-        counting = state == COUNT;
-        count = (state == COUNT)?delay- count_num:0;
+        done <= state == ASSERT_DONE;
+        counting <= state == COUNT;
+        count <= (state == COUNT)?delay- count_num:0;
     end
     assign count_done = cnt== (delay +1)*1000-1;
 endmodule
