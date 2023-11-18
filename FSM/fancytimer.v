@@ -1,5 +1,5 @@
 //https://hdlbits.01xz.net/wiki/Exams/review2015_fancytimer
-// debug note:
+// debug note:under @posedge clk, case state, it is actually casing at thr end of state signal.
 module top_module (
     input clk,
     input reset,      // Synchronous reset
