@@ -1,3 +1,5 @@
+//https://hdlbits.01xz.net/wiki/Mt2015_lfsr
+// debug code: forgot to assign Q012 to LEDR.
 module top_module (
 	input [2:0] SW,      // R
 	input [1:0] KEY,     // L and clk
