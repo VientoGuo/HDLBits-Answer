@@ -1,4 +1,7 @@
 // https://hdlbits.01xz.net/wiki/Exams/2014_q3fsm
+// debug code: 1. can't assign output with@(*), should use @(posedge clk)
+//             2. notice that should add reset for output section
+//             3. notice that my FSM B stage starts at the period after s became 1, which is 1 clock period later than the plot on that webset. 
 
 module top_module (
     input clk,
