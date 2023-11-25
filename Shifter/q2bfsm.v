@@ -1,6 +1,7 @@
 //https://hdlbits.01xz.net/wiki/Exams/2013_q2bfsm
 // debug code: 1. SET_G also counted as a waiting y stage. 2. y is required to stay 1 for 2 clock period.
 //             3. remember to check output assignment. 4. don't assign output at the state assignment section, assign them at the end.
+//             5. to initialize flag, just need to use else command to set it 0 during it's not being used state.
 module top_module (
     input clk,
     input resetn,    // active-low synchronous reset
@@ -42,10 +43,9 @@ module top_module (
         endcase
     end
     always@(*)begin
-        if(next_state == SET_G) flag = 0;
         if((state == WAIT_Y_1)|(state == SET_G))begin
             if(y) flag = 1; else flag = 0;
-        end
+        end else flag = 0;
     end
     assign g = (state==SET_G_1)|(state == SET_G)|(state == WAIT_Y_1);
     assign f = (state == SET_F);
