@@ -62,15 +62,17 @@ module top_module(
         else out_byte = 0;
     end
     // New: Datapath to latch input bits.
-    always@(*)begin
-        if (next_state == BIT1) in_byte[0]=in;
-        if (next_state == BIT2) in_byte[1]=in;
-        if (next_state == BIT3) in_byte[2]=in;
-        if (next_state == BIT4) in_byte[3]=in;
-        if (next_state == BIT5) in_byte[4]=in;
-        if (next_state == BIT6) in_byte[5]=in;
-        if (next_state == BIT7) in_byte[6]=in;
-        if (next_state == BIT8) in_byte[7]=in;
+    always@(posedge clk)begin
+        case(next_state)
+            BIT1:in_byte[0]=in;
+            BIT2:in_byte[1]=in;
+            BIT3:in_byte[2]=in;
+            BIT4:in_byte[3]=in;
+            BIT5:in_byte[4]=in;
+            BIT6:in_byte[5]=in;
+            BIT7:in_byte[6]=in;
+            BIT8:in_byte[7]=in;
+        endcase
     end
 
 endmodule
