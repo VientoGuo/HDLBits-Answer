@@ -1,5 +1,6 @@
 //https://hdlbits.01xz.net/wiki/Exams/ece241_2013_q8
 //debug note: we can only have 3 state, for the success state it is decided by both state and input x.
+// debug note2: since aresetn is active when it is low, so we should detect it at negedge.
 module top_module (
     input clk,
     input aresetn,    // Asynchronous active-low reset
