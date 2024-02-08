@@ -1,5 +1,5 @@
 //-- modified by xlinxdu, 2022/05/17
-// copied from: https://blog.csdn.net/qq_43244515/article/details/124825458?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522170736276416800215034672%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=170736276416800215034672&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-124825458-null-null.142^v99^pc_search_result_base7&utm_term=%E5%BC%82%E6%AD%A5fifo&spm=1018.2226.3001.4187
+// 原文链接：https://blog.csdn.net/qq_43244515/article/details/124825458
 module async_fifo
 #(
   parameter DATA_WIDTH    = 16               ,
@@ -146,6 +146,3 @@ end
 endmodule
 ————————————————
 
-                            版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
-                        
-原文链接：https://blog.csdn.net/qq_43244515/article/details/124825458
