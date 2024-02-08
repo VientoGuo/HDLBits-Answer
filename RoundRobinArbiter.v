@@ -1,6 +1,6 @@
 //原文链接：https://blog.csdn.net/Ocean_Yv/article/details/126496121
 // Verify a RRA:
-// In any cycle, there can be only one grant signal that can be asserted.
+// 1)In any cycle, there can be only one grant signal that can be asserted.
 // 2) Each requesting agent should get a grant signal in a maximum 2 cycle window.
 // 3) If one requesting agent gets a grant, it cannot receive another grant unless no other agent is requesting.
 // 4) If there are no requests, there cannot be any grants asserted
