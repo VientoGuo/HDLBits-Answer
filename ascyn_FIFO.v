@@ -1,5 +1,16 @@
 //-- modified by xlinxdu, 2022/05/17
 // 原文链接：https://blog.csdn.net/qq_43244515/article/details/124825458
+// To Verify an Async_fifo:
+//Only read
+//Only write
+//Read and write simultaneously
+//write full
+//read empty
+//full and empty are mutually exclusive
+//simultaneously write_full and read_empty are active ( When read-side-clk is deactivated and other side it is writing)
+//check reset behavior
+//check reset to read/write wake up
+
 module async_fifo
 #(
   parameter DATA_WIDTH    = 16               ,
